@@ -1,13 +1,11 @@
 from django.db import models
 
-# Represents categories of menu items
 class MenuCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
 
-# Represents individual menu items
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -16,12 +14,12 @@ class MenuItem(models.Model):
     def __str__(self):
         return self.name
 
-# Represents a customer's order
 class Order(models.Model):
     STATUSES = [
         ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
         ('Declined', 'Declined'),
+        ('ReadyForPickUp', 'Ready for Pick Up'),
         ('Completed', 'Completed'),
     ]
 
@@ -33,7 +31,6 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id} - {self.customer_name}"
 
-# Represents items in a customer's order
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)

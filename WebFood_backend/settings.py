@@ -27,6 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'reactwebapp904@gmail.com'      # Replace with your actual Gmail address
+EMAIL_HOST_PASSWORD = 'cvqr ahdq blrd qvwe'     # Replace with the App Password you generated (or your real password if no 2FA)
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'reactwebapp904@gmail.com'   # This will appear as the "From" email address in the sent email
+
 
 # Application definition
 
