@@ -27,6 +27,7 @@ class MenuCategorySerializer(serializers.ModelSerializer):
 class MenuItemSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=MenuCategory.objects.all())
     price = serializers.DecimalField(max_digits=10, decimal_places=2, required=True)  # Ensure price is required
+    description = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
         model = MenuItem
