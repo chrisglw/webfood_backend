@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import JsonResponse
+from users.views import LoginView
 
 def root_view(request):
    return JsonResponse({"message": "Welcome to WebFood API!"})
@@ -27,4 +28,5 @@ urlpatterns = [
     path('api/auth/', include('users.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('menu.urls')),
+    path('api/login/', LoginView.as_view(), name='login'),
 ]
