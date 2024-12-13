@@ -26,8 +26,9 @@ class MenuCategorySerializer(serializers.ModelSerializer):
 
 class MenuItemSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=MenuCategory.objects.all())
-    price = serializers.DecimalField(max_digits=10, decimal_places=2, required=True)  # Ensure price is required
+    price = serializers.DecimalField(max_digits=10, decimal_places=2, required=True)  
     description = serializers.CharField(required=False, allow_blank=True)
+    is_available = serializers.BooleanField(default=True)  
 
     class Meta:
         model = MenuItem
@@ -36,6 +37,13 @@ class MenuItemSerializer(serializers.ModelSerializer):
     def get_price(self, obj):
         # Ensure price is serialized as a float
         return float(obj.price)
+    
+    def update(self, instance, validated_data):
+        # Update only the fields provided in the request
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
         
 
 # Serializer for OrderItem
