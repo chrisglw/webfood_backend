@@ -16,3 +16,5 @@ class Command(BaseCommand):
             cursor.execute("DELETE FROM sqlite_sequence WHERE name='menu_orderitem';")
 
         self.stdout.write(self.style.SUCCESS('Successfully reset orders and order items!'))
+
+# Run python manage.py reset_orders   

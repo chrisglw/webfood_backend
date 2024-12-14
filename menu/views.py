@@ -34,7 +34,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     def sales_report(self, request):
         # Filter orders by date range (e.g., last 30 days)
         last_30_days = now() - timedelta(days=30)
-        orders = Order.objects.filter(created_at__gte=last_30_days)
+        valid_statuses = ['Accepted', 'ReadyForPickUp', 'Completed'] 
+        orders = Order.objects.filter(created_at__gte=last_30_days, status__in=valid_statuses)
 
         # Calculate total revenue
         total_revenue = orders.aggregate(total=Sum('total'))['total'] or 0  # Changed to 'total'
